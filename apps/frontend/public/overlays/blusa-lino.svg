@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="linenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#F7F5F0" />
+      <stop offset="100%" stop-color="#EBE7DE" />
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <!-- Mangas fluidas 3/4 -->
+    <path d="M140 100 Q80 180 95 280 Q130 270 145 220 Z" fill="url(#linenGrad)" stroke="#D8D3C8" stroke-width="2" />
+    <path d="M360 100 Q420 180 405 280 Q370 270 355 220 Z" fill="url(#linenGrad)" stroke="#D8D3C8" stroke-width="2" />
+
+    <!-- Cuerpo de la blusa de lino -->
+    <path d="M150 90 Q250 115 350 90 Q370 250 360 410 Q250 425 140 410 Q130 250 150 90 Z" fill="url(#linenGrad)" stroke="#D8D3C8" stroke-width="2" />
+
+    <!-- Escote barco suave -->
+    <path d="M170 90 Q250 130 330 90" fill="none" stroke="#D3CDC0" stroke-width="3" />
+
+    <!-- Pliegues y caída natural de lino -->
+    <path d="M220 135 Q210 270 200 410" stroke="rgba(0,0,0,0.06)" stroke-width="5" fill="none" />
+    <path d="M250 135 Q250 270 250 415" stroke="rgba(0,0,0,0.05)" stroke-width="4" fill="none" />
+    <path d="M280 135 Q290 270 300 410" stroke="rgba(0,0,0,0.06)" stroke-width="5" fill="none" />
+
+    <!-- Dobladillo curvado -->
+    <path d="M140 410 Q250 435 360 410" fill="none" stroke="#D3CDC0" stroke-width="3" />
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 550" width="100%" height="100%">
+  <defs>
+    <linearGradient id="camelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4B085" />
+      <stop offset="50%" stop-color="#C19A6B" />
+      <stop offset="100%" stop-color="#A57F52" />
+    </linearGradient>
+    <linearGradient id="lapelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBB08E" />
+      <stop offset="100%" stop-color="#B28C5E" />
+    </linearGradient>
+    <filter id="blazerShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.28" />
+    </filter>
+  </defs>
+
+  <g filter="url(#blazerShadow)">
+    <!-- Mangas del blazer -->
+    <path d="M125 105 L60 380 Q90 395 120 375 L145 220 Z" fill="url(#camelGrad)" />
+    <path d="M375 105 L440 380 Q410 395 380 375 L355 220 Z" fill="url(#camelGrad)" />
+
+    <!-- Estructura del cuerpo -->
+    <path d="M130 95 Q250 80 370 95 L375 460 Q250 475 125 460 Z" fill="url(#camelGrad)" />
+
+    <!-- Hombreras estructuradas -->
+    <path d="M120 100 Q150 90 200 95 L180 130 Z" fill="rgba(255,255,255,0.15)" />
+    <path d="M380 100 Q350 90 300 95 L320 130 Z" fill="rgba(255,255,255,0.15)" />
+
+    <!-- Solapas anchas de muesca -->
+    <path d="M190 95 L145 200 L215 220 L245 340 L220 340 L180 200 Z" fill="url(#lapelGrad)" stroke="#8F6B40" stroke-width="2" />
+    <path d="M310 95 L355 200 L285 220 L255 340 L280 340 L320 200 Z" fill="url(#lapelGrad)" stroke="#8F6B40" stroke-width="2" />
+
+    <!-- Cuello interior / Escote central -->
+    <path d="M200 95 Q250 120 300 95 L255 340 Z" fill="none" stroke="#8F6B40" stroke-width="3" />
+
+    <!-- Botones frontales de carey -->
+    <circle cx="250" cy="355" r="7" fill="#3D2817" stroke="#8F6B40" stroke-width="2" />
+    <circle cx="250" cy="405" r="7" fill="#3D2817" stroke="#8F6B40" stroke-width="2" />
+
+    <!-- Bolsillos con solapa -->
+    <rect x="145" y="380" width="75" height="16" rx="3" fill="#B28C5E" stroke="#8F6B40" stroke-width="2" />
+    <rect x="280" y="380" width="75" height="16" rx="3" fill="#B28C5E" stroke="#8F6B40" stroke-width="2" />
+    <rect x="155" y="210" width="45" height="8" rx="2" fill="#B28C5E" opacity="0.8" />
+  </g>
+</svg>

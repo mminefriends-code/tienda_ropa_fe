@@ -1,0 +1,89 @@
+{
+  "alerts": [
+    {
+      "variantId": "cmu026rvk000ol2lk42wfqth6",
+      "sku": "BLA-SAST-L-CAM",
+      "size": "L",
+      "color": "Camel",
+      "currentStock": 5,
+      "reorderPoint": 5,
+      "productId": "cmu026rvk000jl2lkiwsx2oab",
+      "productName": "Blazer Sastre Estructurado",
+      "categoryId": "cmu026rve0007l2lkw1d0t9a6",
+      "categoryName": "Chaquetas & Abrigos",
+      "suppliers": [
+        {
+          "id": "cmubgrbsv0000xe9azuuu5127",
+          "name": "Textil Iberia S.L.",
+          "email": "ventas@textil-iberia.com",
+          "phone": "+34 916 000 000"
+        }
+      ]
+    },
+    {
+      "variantId": "cmu026rvs001bl2lkfsef1d6r",
+      "sku": "VES-GALA-XS-BOR",
+      "size": "XS",
+      "color": "Rojo Borgoña",
+      "currentStock": 5,
+      "reorderPoint": 5,
+      "productId": "cmu026rvr0019l2lkjx9wqmjj",
+      "productName": "Vestido Largo Gala Escote Espalda",
+      "categoryId": "cmu026rvb0004l2lkjpbng9zm",
+      "categoryName": "Vestidos",
+      "suppliers": [
+        {
+          "id": "cmubgrbsv0000xe9azuuu5127",
+          "name": "Textil Iberia S.L.",
+          "email": "ventas@textil-iberia.com",
+          "phone": "+34 916 000 000"
+        }
+      ]
+    }
+  ],
+  "created": {
+    "id": "cmubgrbsv0000xe9azuuu5127",
+    "categories": [
+      {
+        "id": "cmubgrbsv0002xe9ao7g2xog0",
+        "supplierId": "cmubgrbsv0000xe9azuuu5127",
+        "categoryId": "cmu026rve0007l2lkw1d0t9a6",
+        "createdAt": "2026-09-21T16:32:36.991Z",
+        "category": {
+          "id": "cmu026rve0007l2lkw1d0t9a6",
+          "name": "Chaquetas & Abrigos"
+        }
+      },
+      {
+        "id": "cmubgrbsv0003xe9aiekataoe",
+        "supplierId": "cmubgrbsv0000xe9azuuu5127",
+        "categoryId": "cmu026rvd0006l2lkc9ma44p7",
+        "createdAt": "2026-09-21T16:32:36.991Z",
+        "category": {
+          "id": "cmu026rvd0006l2lkc9ma44p7",
+          "name": "Pantalones & Faldas"
+        }
+      },
+      {
+        "id": "cmubgrbsv0004xe9albqobs39",
+        "supplierId": "cmubgrbsv0000xe9azuuu5127",
+        "categoryId": "cmu026rvc0005l2lkizan6el9",
+        "createdAt": "2026-09-21T16:32:36.991Z",
+        "category": {
+          "id": "cmu026rvc0005l2lkizan6el9",
+          "name": "Tops & Blusas"
+        }
+      },
+      {
+        "id": "cmubgrbsv0005xe9amiat5g2s",
+        "supplierId": "cmubgrbsv0000xe9azuuu5127",
+        "categoryId": "cmu026rvb0004l2lkjpbng9zm",
+        "createdAt": "2026-09-21T16:32:36.991Z",
+        "category": {
+          "id": "cmu026rvb0004l2lkjpbng9zm",
+          "name": "Vestidos"
+        }
+      }
+    ]
+  }
+}

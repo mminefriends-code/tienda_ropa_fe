@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="burgundyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88223B" />
+      <stop offset="50%" stop-color="#6B1D2F" />
+      <stop offset="100%" stop-color="#4A1220" />
+    </linearGradient>
+    <filter id="galaShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <g filter="url(#galaShadow)">
+    <!-- Tirantes finos -->
+    <line x1="180" y1="80" x2="180" y2="130" stroke="#88223B" stroke-width="4" stroke-linecap="round" />
+    <line x1="320" y1="80" x2="320" y2="130" stroke="#88223B" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Corsé / Pecho ceñido -->
+    <path d="M165 125 Q250 145 335 125 Q350 200 325 300 Q250 320 175 300 Q150 200 165 125 Z" fill="url(#burgundyGrad)" />
+    
+    <!-- Escote corazón elegante -->
+    <path d="M165 125 Q210 110 250 135 Q290 110 335 125" fill="none" stroke="#4A1220" stroke-width="2.5" />
+
+    <!-- Falda larga de gala con apertura lateral seductora -->
+    <path d="M175 300 Q120 540 100 760 Q210 770 290 755 L320 480 Q340 380 325 300 Z" fill="url(#burgundyGrad)" />
+    <path d="M290 755 Q350 760 410 750 Q390 540 325 300 Z" fill="#581625" />
+
+    <!-- Pliegues de caída y brillo de crepé satinado -->
+    <path d="M220 310 Q180 530 160 760" stroke="rgba(255,255,255,0.18)" stroke-width="6" fill="none" />
+    <path d="M270 310 Q260 530 250 760" stroke="rgba(0,0,0,0.2)" stroke-width="7" fill="none" />
+    <path d="M300 480 Q350 620 370 750" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none" />
+  </g>
+</svg>

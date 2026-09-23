@@ -1,0 +1,293 @@
+================================================================
+ TIENDA ROPA - EXPLICACION COMPLETA DEL PROYECTO
+ Tienda de moda femenina online con prueba virtual de ropa (AR Try-On)
+================================================================
+
+INDICE
+1. Que es el proyecto
+2. Estructura de carpetas
+3. Tecnologias principales (Stack)
+4. Como funciona cada parte
+5. Archivos y carpetas explicados
+   a. Raiz del proyecto
+   b. Backend (NestJS)
+   c. Frontend (React)
+   d. Base de datos (Prisma / PostgreSQL)
+   e. Carpetas AR (Try-On)
+6. Como levantarlo / instalarlo
+7. Comandos utiles
+8. Notas y cosas a tener en cuenta
+
+----------------------------------------------------------------
+1. QUE ES EL PROYECTO
+----------------------------------------------------------------
+Es un monorepo (un repositorio que contiene varios proyectos juntos)
+de una tienda de ropa online. Tiene:
+
+- Una API backend (servidor) que guarda y sirve los datos.
+- Un frontend web (la pagina que ve el usuario).
+- Una app movil (aun sin crear, esta planeada).
+- Un paquete compartido (aun vacio).
+- Funcionalidad AR Try-On: probarte ropa con la camara del
+  dispositivo usando realidad aumentada.
+
+----------------------------------------------------------------
+2. ESTRUCTURA DE CARPETAS
+----------------------------------------------------------------
+tienda_ropa_fe/                <- Raiz del proyecto (monorepo)
+├── apps/                      <- Aplicaciones
+│   ├── backend/               <- API (NestJS)
+│   ├── frontend/              <- Web (React + Vite)
+│   └── mobile/                <- React Native (PENDIENTE, vacia)
+├── packages/
+│   └── shared/                <- Tipos/utilidades compartidas (vacia)
+├── node_modules/              <- Dependencias instaladas (no tocar)
+├── docker-compose.yml         <- Config para levantar servicios con Docker
+├── package.json               <- Scripts y workspaces del monorepo
+├── package-lock.json          <- Version exacta de dependencias
+├── .gitignore                 <- Archivos que no se suben a Git
+├── README.md                  <- Documentacion oficial del proyecto
+├── test_result.txt            <- Resultados de pruebas
+└── EXPLICACION_TIENDA_ROPA.txt <- ESTE archivo
+
+----------------------------------------------------------------
+3. TECNOLOGIAS PRINCIPALES (STACK)
+----------------------------------------------------------------
+BACKEND:
+- Node.js (v20+)               -> Motor de JavaScript en el servidor
+- TypeScript                   -> JavaScript con tipos (mas seguro)
+- NestJS                       -> Framework para APIs (estructurado, modular)
+- Prisma ORM                   -> Maneja la base de datos con codigo
+- PostgreSQL                   -> Base de datos (tablas, relaciones)
+- Passport + Passport-JWT      -> Autenticacion segura (logins/tokens)
+- bcrypt                       -> Cifra las contrasenas
+- class-validator / class-transformer -> Valida los datos que llegan
+- @nestjs/swagger              -> Documentacion automatica de la API
+
+FRONTEND:
+- React 18                     -> Libreria para interfaces de usuario
+- Vite 5                       -> Herramienta de desarrollo/build rapida
+- TypeScript                   -> Tipos en el frontend tambien
+- TailwindCSS                  -> Estilos con clases CSS
+- React Router DOM             -> Navegacion entre paginas
+- TanStack React Query         -> Carga/guardado de datos del servidor
+- Zustand                      -> Manejo de estado (logueo, carrito)
+- Axios                        -> Hacer pedidos HTTP a la API
+- React Hook Form              -> Formularios (registro, login, etc.)
+- react-hot-toast              -> Notificaciones bonitas
+- @imgly/background-removal    -> Quita el fondo de fotos (IA)
+- @mediapipe/tasks-vision      -> Deteccion de cuerpo/camara (para AR)
+
+BASE DE DATOS:
+- PostgreSQL 16                -> Motor de base de datos relacional
+- Redis 7                      -> Cache / tareas rapidas (usado via Docker)
+- Prisma Schema                -> Define las tablas en schema.prisma
+
+INFRAESTRUCTURA:
+- Docker + Docker Compose      -> Levanta Postgres, Redis, backend y frontend
+- Turbo (turborepo)            -> Orquesta los workspaces del monorepo
+
+----------------------------------------------------------------
+4. COMO FUNCIONA CADA PARTE
+----------------------------------------------------------------
+- El FRONTEND (http://localhost:5173) es la pagina que ve el cliente.
+- El BACKEND (http://localhost:3000/api) expone la API REST.
+- La API se documenta sola en http://localhost:3000/api/docs (Swagger).
+- Las paginas del frontend piden datos a la API usando Axios mediante
+  el archivo apps/frontend/src/services/endpoints.ts.
+- Cuando haces login, el backend entrega un JWT (token). El frontend lo
+  guarda y lo envia en cada pedido para saber quien sos.
+- El backend usa Prisma para leer/escribir en PostgreSQL.
+- Los pedidos se guardan en la base de datos, y el stock de cada
+  variante se descontar automaticamente.
+- El AR Try-On usa la camara (getUserMedia), overlay de ropa (SVG/GLB)
+  y MediaPipe para detectar el cuerpo.
+
+----------------------------------------------------------------
+5. ARCHIVOS Y CARPETAS EXPLICADOS
+----------------------------------------------------------------
+a) RAIZ DEL PROYECTO
+  package.json                 -> Workspaces + scripts globales
+                                  (dev:backend, dev:frontend, db:push, etc.)
+  docker-compose.yml           -> Servicios: postgres, redis, backend,
+                                  frontend. Con 'docker-compose up -d'
+                                  se levantan todos juntos.
+  README.md                    -> Manual oficial del proyecto.
+  .gitignore                   -> Ignora node_modules, dist, .env, etc.
+
+b) BACKEND (apps/backend)  - Carpeta "src"
+  main.ts                      -> Punto de entrada. Configura CORS,
+                                  validaciones, prefijo /api y Swagger.
+  app.module.ts                -> Modulo raiz que une todos los modulos.
+  prisma/prisma.module.ts      -> Modulo que provee el cliente Prisma.
+  prisma/prisma.service.ts     -> Servicio que conecta a la base de datos.
+  common/decimal.interceptor.ts-> Convierte numeros decimales (precios).
+
+  Modulos por area de negocio (cada uno con controller, module, service y DTOs):
+  auth/        -> Registro, login, refresh token, guards, estrategias JWT.
+  users/       -> Perfil de usuario, medidas corporales, roles.
+  products/    -> Catalogo, variantes (talla/color), stock, precios.
+  categories/  -> Categorias jerarquicas parent/child.
+  cart/        -> Carrito de compras con items.
+  orders/      -> Pedidos, items, direcciones, pagos.
+  ar/          -> Modelos 3D, sesiones de AR Try-On.
+  suppliers/   -> Proveedores y reposicion de stock.
+
+  Archivos de config:
+  .env.example / .env         -> Variables de entorno (base de datos, JWT).
+  Dockerfile                  -> Imagen Docker del backend.
+  nest-cli.json               -> Config de NestJS CLI.
+  tsconfig.json               -> Config de TypeScript.
+  prisma/schema.prisma        -> Define TODAS las tablas de la base de datos.
+  prisma/seed.ts              -> Datos de ejemplo para empezar.
+
+c) FRONTEND (apps/frontend)
+  index.html                   -> Pagina HTML base donde monta React.
+  vite.config.ts               -> Config de Vite (puerto 5173, proxy /api
+                                  hacia el backend :3000, alias @ -> src).
+  vite.https.config.ts         -> Variante con HTTPS (para camara/AR).
+  tailwind.config.js           -> Config de Tailwind (colores "primary").
+  postcss.config.js            -> Config de PostCSS.
+  tsconfig.json / tsconfig.node.json -> Config TypeScript.
+
+  src/main.tsx                 -> Punto de entrada React. Carga QueryClient,
+                                  Router, AuthProvider y CartProvider.
+  src/App.tsx                  -> Defines las rutas de todas las paginas.
+  src/index.css                -> Estilos globales (Tailwind).
+
+  src/pages/:
+    Home.tsx                   -> Pagina principal (destacados).
+    Products.tsx               -> Listado de productos con filtros.
+    ProductDetail.tsx          -> Detalle de producto + selector talla/color.
+    Cart.tsx                   -> Carrito de compras.
+    Checkout.tsx               -> Paso de pedido con direccion.
+    account/                   -> Orders, OrderDetail, Profile (cuenta).
+    admin/                     -> Panel de ADMIN: Dashboard, ProductsAdmin,
+                                   ProductForm, CategoriesAdmin, OrdersAdmin,
+                                   UsersAdmin, SuppliersAdmin, StockManager.
+    auth/                      -> Login.tsx y Register.tsx.
+
+  src/components/:
+    layout/    -> Header.tsx (barra superior) y Footer.tsx.
+    auth/      -> ProtectedRoute.tsx (rutas que requieren login/admin).
+    product/   -> ProductCard, CategoryCard, FilterDrawer.
+    ar/        -> TryOnViewer.tsx (carga la camara y superpone ropa),
+                  CaptureResultModal.tsx (foto del probador).
+    admin/     -> ArModelManager.tsx (sube modelos AR).
+
+  src/services/:
+    api.ts                 -> Instancia de Axios (URL base, token, refresh).
+    endpoints.ts            -> TODAS las llamadas a la API, organizadas por
+                               producto, categoria, carrito, pedidos, auth,
+                               usuarios y AR.
+    adminApi.ts             -> Llamadas solo para administradores.
+    backgroundRemoval.ts    -> Quita fondo de imagenes de productos.
+
+  src/hooks/:
+    useQueries.ts            -> Hooks con React Query para datos.
+
+  src/store/:
+    authStore.tsx            -> Estado global de login (Zustand).
+    cartStore.tsx            -> Estado global del carrito (Zustand).
+
+  src/types/index.ts         -> Tipos TypeScript de todo el dominio.
+  src/utils/                 -> Utilidades (formateo, etc.).
+
+  public/overlays/           -> SVG de prendas para el modo AR
+                               (vestido-floral.svg, blazer-camel.svg,
+                               blusa-lino.svg, cazadora-biker.svg,
+                               pantalon-palazzo.svg, vestido-gala.svg).
+
+d) BASE DE DATOS (prisma/schema.prisma)
+  Usa PostgreSQL. El "generator provider = prisma-client-js" genera el
+  cliente con el cual el backend consulta la base de datos.
+  Modelos (tablas) principales:
+    - User, Address
+    - Category (jerarquica)
+    - Product, ProductVariant (talla+color+stock+precio), ProductImage
+    - Cart, CartItem, Wishlist, WishlistItem
+    - Order, OrderItem, Payment
+    - Review
+    - BodyMeasurement (medidas para recomendar talla)
+    - ArModel, ArSession (realidad aumentada)
+    - Supplier, SupplierCategory, RestockOrder, RestockOrderItem
+  Enums: Role (CUSTOMER/ADMIN/MANAGER), OrderStatus, PaymentStatus,
+         AddressType, ArFormat (GLTF/GLB/USDZ/OBJ), RestockStatus.
+
+e) AR TRY-ON (Realidad Aumentada)
+  - Backend guarda ArModel: formato (GLB/GLTF/USDZ/OBJ), url del modelo,
+    escala, posicion, rotacion, imagen overlay.
+  - Frontend pide acceso a la camara (getUserMedia) y superpone la prenda.
+  - MediaPipe (tasks-vision) detecta el cuerpo para ubicar la prenda.
+  - Al terminar guarda una sesion (duracion, screenshot, rating).
+
+----------------------------------------------------------------
+6. COMO LEVANTARLO / INSTALARLO
+----------------------------------------------------------------
+OPCION A) Con Docker (recomendado, levanta todo junto)
+  1) Tener instalados: Docker Desktop, Node.js 20+, npm.
+  2) En la raiz del proyecto:
+       docker-compose up -d
+  3) Resultado:
+       Backend  -> http://localhost:3000
+       Swagger  -> http://localhost:3000/api/docs
+       Frontend -> http://localhost:5173
+
+OPCION B) Sin Docker (todo local)
+  Backend:
+    cd apps/backend
+    npm install
+    cp .env.example .env   (y editar DATABASE_URL con tu Postgres)
+    npm run db:generate
+    npm run db:push        (crea las tablas)
+    npm run db:seed        (datos de ejemplo)
+    npm run start:dev
+
+  Frontend (en otra terminal):
+    cd apps/frontend
+    npm install
+    npm run dev
+
+NOTA: El '.env' ya existe en apps/backend. NO se sube a Git (esta
+en .gitignore). Si se tuviera que configurar, el DATABASE_URL apunta a
+postgres en localhost:5432 con base 'tienda_ropa'.
+
+----------------------------------------------------------------
+7. COMANDOS UTILES
+----------------------------------------------------------------
+Desde la raiz del monorepo:
+  npm run dev:backend       -> Backend en modo desarrollo
+  npm run dev:frontend      -> Frontend en modo desarrollo
+  npm run dev:frontend:https-> Frontend con HTTPS (para camara/AR)
+  npm run build:all         -> Compila backend + frontend
+  npm run db:generate       -> Genera cliente Prisma
+  npm run db:push           -> Sincroniza schema con la base de datos
+  npm run db:seed           -> Carga datos de ejemplo
+  npm run db:studio         -> Abre Prisma Studio (ver BD en el navegador)
+
+Desde apps/backend:
+  npm run start:dev         -> Dev con recarga automatica (watch)
+  npm run build             -> Compila a produccion
+  npm run lint              -> Revisa estilos de codigo
+
+Desde apps/frontend:
+  npm run dev               -> Servidor de desarrollo Vite
+  npm run build             -> Build de produccion
+  npm run lint              -> Revisa estilos de codigo
+
+----------------------------------------------------------------
+8. NOTAS Y COSAS A TENER EN CUENTA
+----------------------------------------------------------------
+- packages/shared y apps/mobile estan VACIOS (pendientes).
+- Para el AR con camara hay que usar el modo HTTPS (npm run
+  dev:frontend:https), porque el navegador solo da la camara en HTTPS
+  (o localhost).
+- Los archivos .env contienen secretos, nunca se comparten en Git.
+- Node version requerida: 20+ (por Vite 5 y NestJS 10).
+- En el futuro se planea migrar el backend a .NET (ASP.NET Core) como
+  parte de un 2do parcial obligatorio de la materia.
+- Despliegue a produccion: Azure (pendiente de hacer).
+
+================================================================
+ FIN DEL DOCUMENTO
+================================================================

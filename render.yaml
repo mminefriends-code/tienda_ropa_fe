@@ -1,0 +1,32 @@
+databases:
+  - name: tienda-ropa-db
+    plan: free
+    databaseName: tienda_ropa
+    user: postgres
+
+services:
+  - type: web
+    name: tienda-ropa-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run db:generate --workspace=apps/backend && npm run build --workspace=apps/backend
+    startCommand: npm run start:prod --workspace=apps/backend
+    preDeployCommand: npm run db:push --workspace=apps/backend
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tienda-ropa-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false
+      - key: PUBLIC_API_URL
+        sync: false
+      - key: UPLOAD_DIR
+        value: /opt/render/project/src/apps/backend/uploads

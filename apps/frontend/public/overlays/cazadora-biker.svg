@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 550" width="100%" height="100%">
+  <defs>
+    <linearGradient id="leatherGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#303030" />
+      <stop offset="35%" stop-color="#1F1F1F" />
+      <stop offset="70%" stop-color="#141414" />
+      <stop offset="100%" stop-color="#080808" />
+    </linearGradient>
+    <linearGradient id="silverZip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E0E0E0" />
+      <stop offset="50%" stop-color="#A0A0A0" />
+      <stop offset="100%" stop-color="#E0E0E0" />
+    </linearGradient>
+    <filter id="leatherShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <g filter="url(#leatherShadow)">
+    <!-- Mangas -->
+    <path d="M120 100 L50 370 Q80 385 110 365 L145 200 Z" fill="url(#leatherGrad)" />
+    <path d="M380 100 L450 370 Q420 385 390 365 L355 200 Z" fill="url(#leatherGrad)" />
+
+    <!-- Acolchado en hombros / Biker -->
+    <path d="M110 105 L155 120 L145 150 L95 130 Z" fill="#2B2B2B" stroke="#444" stroke-width="1.5" />
+    <path d="M390 105 L345 120 L355 150 L405 130 Z" fill="#2B2B2B" stroke="#444" stroke-width="1.5" />
+
+    <!-- Cuerpo chaqueta -->
+    <path d="M130 95 Q250 85 370 95 L375 420 Q250 435 125 420 Z" fill="url(#leatherGrad)" />
+
+    <!-- Solapas con botones metálicos a presión -->
+    <path d="M170 95 L120 190 L210 210 L195 95 Z" fill="#262626" stroke="#444" stroke-width="1.5" />
+    <path d="M330 95 L380 190 L290 210 L305 95 Z" fill="#262626" stroke="#444" stroke-width="1.5" />
+
+    <!-- Botones metálicos de solapa -->
+    <circle cx="140" cy="180" r="5" fill="url(#silverZip)" />
+    <circle cx="360" cy="180" r="5" fill="url(#silverZip)" />
+    <circle cx="180" cy="108" r="4" fill="url(#silverZip)" />
+    <circle cx="320" cy="108" r="4" fill="url(#silverZip)" />
+
+    <!-- Cremallera asimétrica plateada -->
+    <path d="M310 95 L220 420" stroke="url(#silverZip)" stroke-width="5" stroke-dasharray="2,3" fill="none" />
+    <polygon points="215,410 225,410 220,425" fill="#FFF" />
+
+    <!-- Bolsillos diagonales con cremallera -->
+    <line x1="150" y1="280" x2="200" y2="310" stroke="url(#silverZip)" stroke-width="3" />
+    <line x1="280" y1="310" x2="330" y2="280" stroke="url(#silverZip)" stroke-width="3" />
+
+    <!-- Cinturón bajo con hebilla plateada -->
+    <path d="M125 415 L375 415 L375 440 L125 440 Z" fill="#141414" stroke="#333" />
+    <rect x="235" y="410" width="30" height="35" rx="3" fill="none" stroke="url(#silverZip)" stroke-width="4" />
+    <line x1="250" y1="412" x2="250" y2="442" stroke="url(#silverZip)" stroke-width="3" />
+  </g>
+</svg>
