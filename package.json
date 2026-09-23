@@ -17,6 +17,7 @@
     "db:studio": "npm run db:studio --workspace=apps/backend"
   },
   "devDependencies": {
+    "@nestjs/cli": "^10.4.9",
     "turbo": "^2.0.0"
   }
 }
